@@ -1,0 +1,94 @@
+body{
+	margin-bottom: 50px;
+}
+header{
+	padding: 1em 0;
+	text-align: center;
+    font-size: 34px;
+    color: #5d9cec;
+    font-weight: 400;
+}
+
+@mixin button($width,$height,$borderRadius,$fs){
+	width: $width;
+	height: $height;
+	line-height: $height;
+	border-radius: $borderRadius;
+	font-size: $fs;
+	text-align: center;
+	text-decoration: none;
+	position: relative;
+	&:after {
+        content: " ";
+        width: 200%;
+        height: 200%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid rgba(0, 0, 0, .2);
+        transform: scale(.5);
+        transform-origin: 0 0;
+        //box-sizing: border-box;
+        border-radius: $borderRadius*2;
+        /*1px border*/
+    }
+}
+%btn-class1{
+	color: #fff;
+	background-color: #04be02;
+	//&:not(.ui-btn-disabled):active{
+	&:active{
+		color: hsla(0,0,100%,.4);
+    	background-color: #039702;
+	};
+}
+%btn-class2{
+	color: #5a5a5a;
+    border: 1px solid #5a5a5a;
+}
+%btn-disabled{
+	color: #fff;
+	background-color: #c7c7c7;
+}
+.ui-btn-inline{
+	display: inline-block;
+	@include button(300px,40px,4px,15px);
+	@extend %btn-class1;
+}
+.ui-btn-inline-disabled{
+	display: inline-block;
+	@include button(300px,40px,4px,15px);
+	@extend %btn-disabled;
+	///////
+	margin-top: 30px;
+}
+.ui-btn-inline-1{
+	display: inline-block;
+	@include button(300px,40px,4px,15px);
+	@extend %btn-class2;
+	&:after{
+        border-width: 0;
+	};
+	///////
+	margin-top: 30px
+}
+.ui-btn-inline-2{
+	display: inline-block;
+	@include button(300px,40px,4px,15px);
+	color: #585858;
+	&:after{
+        border: 1px solid rgba(0, 0, 0, 1);
+	};
+	///////
+	margin-top: 30px
+}
+.ui-btn-inline-3{
+	display: inline-block;
+	@include button(300px,40px,4px,15px);
+	color: #585858;
+	&:after{
+        border: 1px solid rgba(0, 0, 0, 1);
+	};
+	///////
+	margin-top: 30px
+}

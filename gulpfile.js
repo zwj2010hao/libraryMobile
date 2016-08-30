@@ -104,6 +104,10 @@ gulp.task('copy:assetjs',function(){
 	gulp.src(path.join(config.asset,"/**/*js"))
 	.pipe(gulp.dest(path.join(config.dist,'asset')))
 })
+gulp.task('copy:assetfont',function(){
+  gulp.src(path.join(config.asset,"font/*"))
+  .pipe(gulp.dest(path.join(config.dist,'asset/font')))
+})
 gulp.task('default',['copy:assetjs','server'],function () {
   //gulp.watch('src/styles/**/*.scss', ['sass']);
   //gulp.watch('src/snippets/**/*.html', ['tmpl2js']);
