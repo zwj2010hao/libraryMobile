@@ -1,0 +1,41 @@
+{
+  "name": "librarymobile",
+  "version": "1.0.0",
+  "description": "collection",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zwj2010hao/libraryMobile.git"
+  },
+  "keywords": [
+    "collection"
+  ],
+  "author": "Gavin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zwj2010hao/libraryMobile/issues"
+  },
+  "homepage": "https://github.com/zwj2010hao/libraryMobile#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "browser-sync": "^2.14.0",
+    "browserify": "^13.1.0",
+    "cssnano": "^3.7.4",
+    "event-stream": "^3.3.4",
+    "glob": "^7.0.5",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-postcss": "^6.1.1",
+    "gulp-react": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-util": "^3.0.7",
+    "postcss": "^5.1.2",
+    "reactify": "^1.1.1",
+    "velocity": "^0.7.2",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  }
+}
