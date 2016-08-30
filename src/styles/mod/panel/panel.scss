@@ -1,3 +1,6 @@
+body{
+	margin-bottom: 50px;
+}
 header{
 	padding: 1em 0;
 	text-align: center;
@@ -60,7 +63,7 @@ header{
 			}
 		}
 		.panel-txt{
-			-webkit-box-flex:1;
+			//-webkit-box-flex:1;
 			flex:1;
 			.panel-txt-title{
 				font-weight: 400;
@@ -149,9 +152,7 @@ header{
 		    left: 15px;
 		}
 		a{
-			display: -webkit-box;
 			display: flex;
-			-webkit-box-align: center;
 			align-items: center;
 			position: relative;
 			padding: 10px 15px;
@@ -159,12 +160,12 @@ header{
 			font-size: 17px;
 			line-height: (24/17);
 			.panel-img{
+				margin-right: 5px;
 				img{
 					display: block;
 				}
 			}
 			.panel-txt{
-				-webkit-box-flex:1;
 				flex:1;
 			}
 		}
@@ -184,5 +185,29 @@ header{
 			};
 		}
 
+	}
+}
+.panel-normal-txt{
+	.panel-normal-txt-item{
+		a{
+			display: block;
+			padding: 15px;
+			color: #585858;
+			font-size: 17px;
+		}
+		.panel-info{
+			margin-top:15px;
+			.panel-info-meta{
+				float: left;
+				margin-right: 5px;
+				line-height: 1;
+				font-size: 14px;
+				color: #cecece;
+			}
+			.panel-info-mata-extra{
+				padding-left: 10px;
+				border-left: 1px solid #cecece;
+			}
+		}
 	}
 }
