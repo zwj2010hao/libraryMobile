@@ -1,7 +1,11 @@
 /*该css是scss生成 请不要直接修改 开发链接http://gitlab.58corp.com/zhongweijia/M-jvhe-page*/
-@function pxtorem($px){
-    @return $px/2/37.5*1rem;
+@function pxtorem2($px,$base:37.5){
+    @return $px/2/$base*1rem;
 }
+@function pxtorem3($px,$base:37.5){
+    @return $px/3/$base*1rem;
+}
+
 @charset "utf-8";
 *{
 	margin:0;
@@ -25,7 +29,7 @@ footer,header,nav,section{
     display: block;
 }
 a {
-    background: transparent;
+    //background: transparent;
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
 }

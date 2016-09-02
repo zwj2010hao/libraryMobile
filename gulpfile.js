@@ -4,8 +4,8 @@ const fs = require('fs');
 const plugins = require('gulp-load-plugins')();
 const react = require('gulp-react');
 const browserify = require('browserify');
-//const watchify = require('watchify');
 const reactify = require('reactify');
+const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 const glob = require('glob');
 const es = require('event-stream');
@@ -16,7 +16,8 @@ const browserSync = require('browser-sync').create();
 const reload      = browserSync.reload;
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-
+const webpack = require("webpack");
+const webpackConfig = require("./webpack.config.js");
 
 const config = {
   'dist': path.join(__dirname, 'dist'),
@@ -61,19 +62,29 @@ gulp.task('velocity', function (callback) {
   });
 });
 
+// gulp.task('server',['pacjs','sass','velocity'],function () {
+//   browserSync.init({
+//     port: 9000,
+//     startPath: '/?debug',
+//     server: {
+//       baseDir: './dist/'
+//     }
+//   })
+//   gulp.watch(path.join(config.dist, '*.html')).on('change',reload);
+// });
 gulp.task('server',['pacjs','sass','velocity'],function () {
   browserSync.init({
     port: 9000,
     startPath: '/?debug',
     server: {
       baseDir: './dist/'
-    }
+     }
   })
   gulp.watch(path.join(config.dist, '*.html')).on('change',reload);
 });
 
 gulp.task('pacjs', function(done) {
-    glob(path.join(config.src,"js/*js"), function(err, files) {
+    glob(path.join(config.src,"js/*.js"), function(err, files) {
         if(err) done(err);
         var tasks = files.map(function(entry) {
             return  browserify([entry])
@@ -86,6 +97,39 @@ gulp.task('pacjs', function(done) {
         es.merge(tasks).on('end', done)
         .pipe(reload({stream: true}));
     })
+});
+
+// gulp.task('pacvue', function(done) {
+//     //打包不知道为何vue文件打包不进去  改用webpack
+//     glob(path.join(config.src,"vue/*.js"), function(err, files) {
+//         if(err) done(err);
+//         var tasks = files.map(function(entry) {
+//             return  browserify([entry])
+//                     .transform("vueify")
+//                     .transform("babelify", {presets: ["es2015"]})
+//                   //.transform(babelify.configure({presets: ["es2015"]}))
+//                   .bundle()
+//                   .pipe(source(entry))
+//                   .pipe(plugins.rename({dirname:""})) //移除原目录结构
+//                   .pipe(gulp.dest(path.join(config.dist,"js")));
+//             });
+//         es.merge(tasks).on('end', done)
+//         .pipe(reload({stream: true}));
+//     })
+// });
+
+gulp.task("webpack", function() {
+  var myConfig = Object.create(webpackConfig);
+  // run webpack
+  webpack(
+    // configuration
+    myConfig
+  , function(err, stats) {
+    // if(err) throw new gutil.PluginError("webpack", err);
+    // gutil.log("[webpack]", stats.toString({
+    //   // output options
+    // }));
+  });
 });
 
 gulp.task('sass', function () {
@@ -109,6 +153,15 @@ gulp.task('copy:assetfont',function(){
   .pipe(gulp.dest(path.join(config.dist,'asset/font')))
 })
 gulp.task('default',['copy:assetjs','server'],function () {
+  //gulp.watch('src/styles/**/*.scss', ['sass']);
+  //gulp.watch('src/snippets/**/*.html', ['tmpl2js']);
+  gulp.watch(path.join(config.src, 'templates/*.html'),['velocity']);
+  gulp.watch(path.join(config.src, 'js/*.js'),['pacjs']);
+  gulp.watch(path.join(config.src, 'jsx/**/*.js'),['pacjs']);
+  gulp.watch(path.join(config.src, 'styles/**/*.scss'),['sass']);
+});
+
+gulp.task('gandw',['webpack','copy:assetjs','server'],function () {
   //gulp.watch('src/styles/**/*.scss', ['sass']);
   //gulp.watch('src/snippets/**/*.html', ['tmpl2js']);
   gulp.watch(path.join(config.src, 'templates/*.html'),['velocity']);
